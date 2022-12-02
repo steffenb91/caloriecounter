@@ -1,7 +1,9 @@
 package com.adventofcode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Caravane {
 
@@ -12,15 +14,36 @@ public class Caravane {
     }
 
     public int getTopLoader() {
-        return elves.stream().mapToInt(elf -> elf.getCurrentLoad()).max().getAsInt();
+        return elves.stream()
+            .mapToInt(elf -> elf.getCurrentLoad())
+            .max()
+            .getAsInt();
     }
 
     public int getTopThreeLoaders() {
-        int[] loads = elves.stream().mapToInt(elf -> elf.getCurrentLoad()).sorted().toArray();
-        int top = loads[loads.length - 1];
-        int second = loads[loads.length - 2];
-        int third = loads[loads.length - 3];
-        return top + second + third;
+        int[] loads = getSortedArrayOfLoads();
+        List<Integer> loadList = toList(loads);
+        Collections.reverse(loadList);
+        return loadList.stream()
+            .limit(3)
+            .mapToInt(x -> x)
+            .sum();
+    }
+
+    private int[] getSortedArrayOfLoads() {
+        int[] loads = elves.stream()
+            .mapToInt(elf -> elf.getCurrentLoad())
+            .sorted()
+            .toArray();
+        return loads;
+    }
+
+    private List<Integer> toList(int[] loads) {
+        List<Integer> loadList = new ArrayList<>();
+        for (Integer integer : loads) {
+            loadList.add(integer);
+        }
+        return loadList;
     }
 
 }

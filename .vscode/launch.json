@@ -6,7 +6,7 @@
             "request": "launch",
             "mainClass": "com.adventofcode.App",
             "projectName": "caloriecounter",
-            "args": "src/test/resources/puzzle.txt"
+            "args": "src/test/resources/test.txt"
         },
     ]
 }

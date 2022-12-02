@@ -1,18 +1,14 @@
 package com.adventofcode;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PuzzleReader {
     
+    private static final String DOUBLE_NEWLINE = "\\n\\n";
     private File file;
 
     public PuzzleReader(File file) {
@@ -20,17 +16,24 @@ public class PuzzleReader {
     }
 
     public List<Elf> getElves() throws IOException {
-        String readString = Files.readString(file.toPath());
-        String[] split = readString.split("\\n\\n");
+        String puzzle = Files.readString(file.toPath());
         List<Elf> elves = new ArrayList<>();
-        for (String string : split) {
-            List<Integer> loads = new ArrayList<>();
-            String[] eachLoad = string.split("\\n");
-            for (String load : eachLoad) {
-                loads.add(Integer.parseInt(load));
-            }
-            elves.add(new Elf(loads));
+        for (String caloriesSection : splitByDoubleNewline(puzzle)) {
+            elves.add(extractElv(caloriesSection));
         }
         return elves;
+    }
+
+    private String[] splitByDoubleNewline(String readString) {
+        return readString.split(DOUBLE_NEWLINE);
+    }
+
+    private Elf extractElv(String string) {
+        List<Integer> loadedCalories = new ArrayList<>();
+        String[] calories = string.split("\\n");
+        for (String calorie : calories) {
+            loadedCalories.add(Integer.parseInt(calorie));
+        }
+        return new Elf(loadedCalories);
     }
 }

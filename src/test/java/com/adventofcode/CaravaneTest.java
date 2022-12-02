@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class CaravaneTest {
 
 	@Test
-	public void shouldCompile() {
+	public void shouldGetTopLoader() {
 		Elf firstElf = mock(Elf.class);
 		when(firstElf.getCurrentLoad()).thenReturn(2837);
 		Elf secondElf = mock(Elf.class);
