@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "com.adventofcode.App",
+            "projectName": "caloriecounter",
+            "args": "src/test/resources/puzzle.txt"
+        },
+    ]
+}
